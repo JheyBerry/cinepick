@@ -1,11 +1,16 @@
+export type MovieSumary = {
+  Poster: string;
+  Title: string;
+  Genre: string;
+  Year: string;
+  Index: number;
+};
+
 export type MovieProps = {
   _id: string;
-  Title: string;
-  Year: string;
   Rated: string;
   Released: string;
   Runtime: string;
-  Genre: string;
   Director: string;
   $vectorize: string;
   $vector: Array<number>;
@@ -25,8 +30,27 @@ export type MovieProps = {
   Production: string;
   Website: string;
   Response: string;
-};
+} & MovieSumary;
 
 export type SimilarMovie = {
   $similarity: number;
 } & MovieProps;
+
+export type MovieOnFocus = {
+  movie: MovieProps;
+  index: number;
+};
+
+export type ControlProps = {
+  sliderData: MovieSumary[];
+  movieCollection: MovieProps[];
+  transitionData: MovieProps;
+  handleData: React.Dispatch<React.SetStateAction<MovieSumary[]>>;
+  handleTransitionData: React.Dispatch<React.SetStateAction<MovieProps>>;
+  initData: MovieProps;
+};
+
+export type ProgressProps = {
+  curIndex: number;
+  length: number;
+}

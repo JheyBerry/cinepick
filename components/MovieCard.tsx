@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MovieProps } from "../types";
+import { MovieSumary } from "../types";
 
-export default function MovieCard({ movie }: { movie: MovieProps }) {
+export default function MovieCard({ movie }: { movie: MovieSumary }, className ?: string) {
   return (
     <motion.div
-      className="relative h-52 min-w-[250px] rounded-2xl shadow-md"
+      className={"relative h-52 min-w-[250px] rounded-2xl shadow-md" + className}
       layout
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{
