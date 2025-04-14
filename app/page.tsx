@@ -1,28 +1,21 @@
 import db from "../db";
-import MovieCard from "../components/MovieCard";
+import MoviesCarousel from "../components/MovieCarousel";
 import { MovieProps } from "../types";
 
 export default async function Home() {
-  const movies = db.collection("movies");
-  const result = (await movies.find({}, {}).toArray()) as MovieProps[];
+  const movieCollection = db.collection("movies");
+  const movies = (await movieCollection.find({}, {}).toArray()) as MovieProps[];
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <h1 className="text-3xl font-bold underline">Movie List</h1>
-      <div className="absolute h-full w-full">
-        <div className="flex h-full w-full grid-cols-10">
-          <div className="col-span-4 flex h-full flex-1 flex-col px-5 mb-3">
-            <h1 className="text-3xl font-bold underline">Movies</h1>
-          </div>
-          <div className="col-span-6 flex h-full flex-1 flex-col p-4">
-            <div className="flex w-full gap-6">
-              {result.map((movie) => {
-                return <MovieCard key={movie._id} movie={movie} />;
-              })}
-            </div>
+    <div className="flex h-screen">
+        <div className="col-span-4 flex flex-1 justify-center items-center flex-col px-5 mb-3">
+          <h1 className="text-3xl font-bold underline">Movies</h1>
+        </div>
+        <div className="col-span-6 flex justify-center items-center flex-1 flex-col p-4">
+          <div className="relative w-full gap-6">
+            <MoviesCarousel movies={movies} />
           </div>
         </div>
-      </div>
     </div>
   );
 }
