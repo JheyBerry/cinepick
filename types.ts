@@ -42,11 +42,15 @@ export type MovieOnFocus = {
 };
 
 export type ControlProps = {
+  currentSlideData: MovieOnFocus;
   sliderData: MovieSumary[];
   movieCollection: MovieProps[];
   transitionData: MovieProps;
   handleData: React.Dispatch<React.SetStateAction<MovieSumary[]>>;
   handleTransitionData: React.Dispatch<React.SetStateAction<MovieProps>>;
+  handleCurrentSlideData: React.Dispatch<
+    React.SetStateAction<MovieOnFocus>
+  >;
   initData: MovieProps;
 };
 

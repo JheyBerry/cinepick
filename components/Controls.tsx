@@ -3,12 +3,16 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { ControlProps } from "../types";
 import ControlButton from "./ControlButton";
+import Progress from "./Progress";
 
 export default function Controls({
   sliderData,
+  movieCollection,
   transitionData,
   handleData,
   handleTransitionData,
+  handleCurrentSlideData,
+  currentSlideData,
   initData,
 }: ControlProps) {
   const handlePrev = () => {
@@ -21,6 +25,8 @@ export default function Controls({
       ...initData,
       ...sliderData[sliderData.length - 1],
     });
+
+    updateCurrentSlideData(movieCollection[0]);
   };
 
   const handleNext = () => {
@@ -31,12 +37,14 @@ export default function Controls({
       ...sliderData[0],
     });
 
-    setTimeout(() => {
-      handleData((newData) => [
-        ...(Array.isArray(newData) ? newData : []),
-        transitionData ? transitionData : initData,
-      ]);
-    }, 100);
+    updateCurrentSlideData(initData);
+  };
+
+  const updateCurrentSlideData = (initSlide: typeof initData) => {
+    handleCurrentSlideData({
+      movie: transitionData ? transitionData : initSlide,
+      index: movieCollection.findIndex((movie) => JSON.stringify(movie) === JSON.stringify(currentSlideData.movie)),
+    });
   };
 
   return (
@@ -47,6 +55,7 @@ export default function Controls({
       <ControlButton handleClick={handleNext}>
         <IoIosArrowForward className=" text-xl" />
       </ControlButton>
+      <Progress curIndex={currentSlideData.index} length={sliderData.length} />
     </div>
   );
 }
