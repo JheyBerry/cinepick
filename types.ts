@@ -4,6 +4,8 @@ export type MovieSumary = {
   Genre: string;
   Year: string;
   Index: number;
+  $vectorize: string;
+  $similarity: number;
 };
 
 export type MovieProps = {
@@ -41,20 +43,33 @@ export type MovieOnFocus = {
   index: number;
 };
 
-export type ControlProps = {
+export type MovieInfoProps = {
+  transitionData: MovieProps;
   currentSlideData: MovieOnFocus;
+};
+
+export type ControlProps = {
   sliderData: MovieSumary[];
   movieCollection: MovieProps[];
-  transitionData: MovieProps;
   handleData: React.Dispatch<React.SetStateAction<MovieSumary[]>>;
   handleTransitionData: React.Dispatch<React.SetStateAction<MovieProps>>;
   handleCurrentSlideData: React.Dispatch<
     React.SetStateAction<MovieOnFocus>
   >;
   initData: MovieProps;
-};
+} & MovieInfoProps;
 
 export type ProgressProps = {
   curIndex: number;
   length: number;
 }
+
+export type textProps = {
+  text?: string;
+  className?: string;
+}
+
+export type MovieCardProps = {
+  movie: MovieSumary;
+  className?: string;
+};

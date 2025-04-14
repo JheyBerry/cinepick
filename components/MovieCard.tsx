@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MovieSumary } from "../types";
+import { MovieCardProps } from "../types";
 
-export default function MovieCard({ movie }: { movie: MovieSumary }, className ?: string) {
+export default function MovieCard({ movie, className }: MovieCardProps) {
+  const similarityRating= Number(movie.$similarity.toFixed(2)) * 100;
+
   return (
     <motion.div
       className={"relative h-52 min-w-[250px] rounded-2xl shadow-md" + className}
@@ -29,6 +31,16 @@ export default function MovieCard({ movie }: { movie: MovieSumary }, className ?
         src={movie.Poster}
         className="absolute h-full w-full rounded-2xl object-cover brightness-75"
       />
+      <motion.div
+        layout
+        className="absolute left-0 top-0 h-full w-full rounded-2xl bg-gradient-to-t from-black to-transparent"
+      >
+        {similarityRating && (
+          <div className="absolute w-14 h-14 flex items-center justify-center -top-4 -right-4 bg-orange-300 bg-opacity-90 p-2 rounded-full font-bold">
+            {similarityRating}%
+          </div>
+        )}
+      </motion.div>
       <motion.div className="absolute z-10 flex h-full items-end p-4">
         <motion.div>
           <motion.div

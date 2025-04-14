@@ -1,21 +1,31 @@
 import db from "../db";
-import MoviesCarousel from "../components/MovieCarousel";
 import { MovieProps } from "../types";
+import SimilarMovies from "../components/SimilarMovies";
 
 export default async function Home() {
   const movieCollection = db.collection("movies");
-  const movies = (await movieCollection.find({}, {}).toArray()) as MovieProps[];
+  const movie = await movieCollection.findOne(
+    { Title: "The Shawshank Redemption" },
+    { projection: { $vector: true } }
+  );
+
+  const movies = (await movieCollection
+    .find(
+      {},
+      {
+        vector: movie?.$vector,
+        limit: 10,
+        projection: { $vectorize: true },
+        includeSimilarity: true,
+      }
+    )
+    .toArray()) as MovieProps[];
+
+  console.log(movies);
 
   return (
-    <div className="flex h-screen">
-        <div className="col-span-4 flex flex-1 justify-center items-center flex-col px-5 mb-3">
-          <h1 className="text-3xl font-bold underline">Movies</h1>
-        </div>
-        <div className="col-span-6 flex justify-center items-center flex-1 flex-col p-4">
-          <div className="relative w-full gap-6">
-            <MoviesCarousel movies={movies} />
-          </div>
-        </div>
+    <div className="flex relative min-h-screen select-none overflow-hidden text-white antialiased">
+      <SimilarMovies movies={movies} />
     </div>
   );
 }
