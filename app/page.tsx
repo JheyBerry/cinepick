@@ -1,6 +1,7 @@
 import db from "../db";
 import { MovieProps } from "../types";
 import SimilarMovies from "../components/SimilarMovies";
+import Header from "../components/Header";
 
 export default async function Home() {
   const movieCollection = db.collection("movies");
@@ -24,8 +25,11 @@ export default async function Home() {
   console.log(movies);
 
   return (
+    <>
+    <Header />
     <div className="flex relative min-h-screen select-none overflow-hidden text-white antialiased">
       <SimilarMovies movies={movies} />
     </div>
+    </>
   );
 }

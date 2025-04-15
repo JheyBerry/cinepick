@@ -38,7 +38,7 @@ export default function MovieInfo({
   const movieInfo = transitionData ? transitionData : currentSlideData.movie;
 
   return (
-    <>
+    <div className="items-start">
       <motion.div
         initial="hidden"
         animate={"visible"}
@@ -48,6 +48,7 @@ export default function MovieInfo({
           className="spacing overflow-hidden text-[#D5D5D6]"
           text={movieInfo?.Genre}
         />
+        <motion.span layout className="mb-2 h-1 w-5 rounded-full bg-white" />
         <AnimatedText
           className="my-1 text-4xl font-semibold md:my-3 md:text-8xl md:leading-[100px]"
           text={movieInfo?.Title}
@@ -57,8 +58,6 @@ export default function MovieInfo({
           text={movieInfo?.$vectorize}
         />
       </motion.div>
-
-      <motion.span layout className="mb-2 h-1 w-5 rounded-full bg-white" />
       <motion.div layout className="mt-5 flex items-center gap-3">
         <button
           className="flex h-[41px] w-[41px] items-center justify-center rounded-full bg-yellow-500 text-xs  transition
@@ -73,6 +72,6 @@ export default function MovieInfo({
           SEE DETAILS
         </button>
       </motion.div>
-    </>
+    </div>
   );
 }
