@@ -1,35 +1,17 @@
-import db from "../db";
-import { MovieProps } from "../types";
-import SimilarMovies from "../components/SimilarMovies";
-import Header from "../components/Header";
+import MovieCards from "../components/MovieCard";
+import { FetchAllMoviesData} from "../services/movies";
+export const revalidate = 60 * 60 * 24;
 
 export default async function Home() {
-  const movieCollection = db.collection("movies");
-  const movie = await movieCollection.findOne(
-    { Title: "The Shawshank Redemption" },
-    { projection: { $vector: true } }
-  );
-
-  const movies = (await movieCollection
-    .find(
-      {},
-      {
-        vector: movie?.$vector,
-        limit: 10,
-        projection: { $vectorize: true },
-        includeSimilarity: true,
-      }
-    )
-    .toArray()) as MovieProps[];
-
-  console.log(movies);
+  const movies = await FetchAllMoviesData();
 
   return (
-    <>
-    <Header />
-    <div className="flex relative min-h-screen select-none overflow-hidden text-white antialiased">
-      <SimilarMovies movies={movies} />
+    <div className="flex items-center justify-center pb-24 pt-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+        {movies.map((movie) => (
+          <MovieCards key={movie._id} movie={movie} />
+        ))}
+      </div>
     </div>
-    </>
   );
 }

@@ -8,7 +8,6 @@ import Progress from "./Progress";
 export default function Controls({
   sliderData,
   movieCollection,
-  transitionData,
   handleData,
   handleTransitionData,
   handleCurrentSlideData,
@@ -17,7 +16,7 @@ export default function Controls({
 }: ControlProps) {
   const handlePrev = () => {
     handleData((prevData) => [
-      transitionData ? transitionData : initData,
+      initData,
       ...prevData.slice(0, prevData.length - 1),
     ]);
 
@@ -42,7 +41,7 @@ export default function Controls({
 
   const updateCurrentSlideData = (initSlide: typeof initData) => {
     handleCurrentSlideData({
-      movie: transitionData ? transitionData : initSlide,
+      movie: initSlide,
       index: movieCollection.findIndex((movie) => JSON.stringify(movie) === JSON.stringify(currentSlideData.movie)),
     });
   };
