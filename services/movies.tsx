@@ -1,5 +1,5 @@
 import db from "../db";
-import { MovieProps } from "../types";
+import { MovieProps, MovieSumary } from "../types";
 import { notFound } from "next/navigation";
 
 const movies = db.collection("movies");
@@ -48,7 +48,8 @@ export async function FetchSimilarMoviesData(params: { params: { id: string } })
   return { movie, similarMovies };
 }
 
-export async function FetchMoviesbySearch(term: string) {
+export async function FetchMoviesbySearch(params: { params: { term: string } }) {
+  const { term } = params.params;
   const movieSearchResults = (await movies
     .find(
       {},
@@ -59,7 +60,7 @@ export async function FetchMoviesbySearch(term: string) {
         projection: { $vector: 0 },
       }
     )
-    .toArray()) as MovieProps[];
+    .toArray()) as MovieSumary[];
 
     return movieSearchResults;
 }
