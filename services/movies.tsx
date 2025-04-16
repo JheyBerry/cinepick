@@ -41,7 +41,7 @@ export async function FetchSimilarMoviesData(params: { params: { id: string } })
         includeSimilarity: true,
       }
     )
-    .toArray());
+    .toArray()) as MovieProps[];
 
   // cut the first movie because it is the same as the movie we are looking for
   similarMovies.shift(); // Remove the first movie
