@@ -3,33 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { IoMdBookmark } from "react-icons/io";
-import { MovieSumary, textProps } from "../types";
-
-const item = {
-  hidden: {
-    y: "100%",
-    transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85 },
-  },
-  visible: {
-    y: 0,
-    transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 },
-  },
-};
-
-const AnimatedText = ({ text, className }: textProps) => {
-  return (
-    <span
-      style={{
-        overflow: "hidden",
-        display: "inline-block",
-      }}
-    >
-      <motion.p className={` ${className}`} variants={item} key={text}>
-        {text}
-      </motion.p>
-    </span>
-  );
-};
+import { MovieSumary } from "../types";
+import AnimatedText from "./AnimatedText";
 
 export default function MovieInfo({Genre, Title, $vectorize}: MovieSumary) {
   return (
