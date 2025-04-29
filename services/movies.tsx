@@ -1,5 +1,5 @@
 import db from "../db";
-import { MovieProps, MovieSumary } from "../types";
+import { MovieProps } from "../types";
 import { notFound } from "next/navigation";
 
 const movies = db.collection("movies");
@@ -60,7 +60,7 @@ export async function FetchMoviesbySearch(params: { params: { term: string } }) 
         projection: { $vector: 0 },
       }
     )
-    .toArray()) as MovieSumary[];
+    .toArray()) as MovieProps[];
 
     return movieSearchResults;
 }

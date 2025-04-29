@@ -2,20 +2,20 @@
 import React from "react";
 import MoviesCarousel from "./MovieCarousel";
 import Controls from "./Controls";
-import { MovieSumary, MovieOnFocus } from "../types";
+import { MovieProps, MovieOnFocus } from "../types";
 
 export default function SimilarMovies({
   similarMoviesData,
 }: {
-  similarMoviesData: MovieSumary[];
+  similarMoviesData: MovieProps[];
 }) {
   const movieCollection = similarMoviesData;
   const initData = Object.freeze(similarMoviesData[0]);
 
-  const [sliderData, setData] = React.useState<MovieSumary[]>(
+  const [sliderData, setData] = React.useState<MovieProps[]>(
     movieCollection.slice(1)
   );
-  const [transitionData, setTransitionData] = React.useState<MovieSumary>(
+  const [transitionData, setTransitionData] = React.useState<MovieProps>(
     movieCollection[0]
   );
   const [currentSlideData, setCurrentSlideData] = React.useState<MovieOnFocus>({

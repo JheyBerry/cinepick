@@ -3,10 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { IoMdBookmark } from "react-icons/io";
-import { MovieSumary } from "../types";
+import { MovieProps } from "../types";
 import AnimatedText from "./AnimatedText";
 
-export default function MovieInfo({Genre, Title, $vectorize}: MovieSumary) {
+export default function MovieInfo({Genre, Title, $vectorize}: MovieProps) {
   return (
     <div className="col-span-4 z-10 w-dvh flex flex-1 justify-center items-center flex-col px-5 mb-3">
       <div className="items-start">

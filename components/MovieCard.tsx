@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MovieCardProps, MovieSumary } from "../types";
+import { MovieCardProps, MovieProps } from "../types";
 import Link from "next/link";
 
-function HasSimilarityRating(movie: MovieSumary) {
+function HasSimilarityRating(movie: MovieProps) {
   const movieSimilarity = movie.$similarity;
 
   if (movieSimilarity) {

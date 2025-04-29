@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-import { MovieSumary } from "../types";
+import { MovieProps } from "../types";
 
-export default function MovieBackground({ Poster }: MovieSumary) {
+export default function MovieBackground({ Poster }: MovieProps) {
   return (
     <motion.img
       key={Poster}

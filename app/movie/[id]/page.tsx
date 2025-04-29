@@ -2,7 +2,7 @@ import SimilarMovies from "../../../components/SimilarMovies";
 import MovieInfo from "../../../components/MovieInfo";
 import MovieBackground from "../../../components/MovieBackground";
 import { FetchSimilarMoviesData } from "../../../services/movies";
-import { MovieSumary } from "../../../types";
+import { MovieProps } from "../../../types";
 
 export default async function MoviePage({ params }: { params: Promise<{ id: string }> }) {
   return (
@@ -16,7 +16,7 @@ async function AsyncMoviePageComponents({ params }: { params: Promise<{ id: stri
   const { id } = await params;
   const similarMoviesData = await FetchSimilarMoviesData({ params: { id } });
   const movie  = similarMoviesData.movie;
-  const similarMovies = similarMoviesData.similarMovies.map((movie: MovieSumary) => ({
+  const similarMovies = similarMoviesData.similarMovies.map((movie: MovieProps) => ({
     ...movie,
     _id: movie._id ?? undefined, // Ensure _id is string | undefined
   }));
