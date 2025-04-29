@@ -2,13 +2,13 @@
 import { motion } from "framer-motion";
 import MovieCard from "./MovieCard";
 import AnimatedText from "./AnimatedText";
-import { MovieSumary } from "../types";
+import { MovieProps } from "../types";
 
 export default function SearchResults({
   searchResults,
   term,
 }: {
-  searchResults: MovieSumary[];
+  searchResults: MovieProps[];
   term: string;
 }) {
   return (
