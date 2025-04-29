@@ -29,7 +29,7 @@ async function AsyncMoviePageComponents({ params }: { params: Promise<{ id: stri
     <>
       <MovieBackground Poster={movie.Poster}/>
       <div className="flex h-screen overflow-hidden">
-        <MovieInfo Genre={movie.Genre} Title={movie.Title} $vectorize={movie.$vectorize}/>
+        <MovieInfo {...movie} />
         <SimilarMovies
           similarMoviesData={similarMovies}
         />
